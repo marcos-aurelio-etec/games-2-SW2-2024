@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import application.model.Plataforma;
+import application.record.plataformaDTO;
 import application.repository.PlataformaRepository;
 
 @RestController
@@ -16,7 +17,8 @@ public class PlataformaController {
     private PlataformaRepository plataformaRepo;
 
     @PostMapping
-    public Plataforma insert(@RequestBody Plataforma plataforma) {
-        return plataformaRepo.save(plataforma);
+    public Plataforma insert(@RequestBody PlataformaDTO plataforma) {
+        Plataforma nova = plataformaRepo.save(new Plataforma(plataforma));
+        return new plataformaDTO(nova);
     }
 }
